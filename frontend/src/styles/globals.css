@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 255, 255, 255;
+  --background-hex: #ffffff;
+  --foreground: 0, 0, 0;
+  --foreground-hex: #000000;
+  --card: 255, 255, 255;
+  --card-foreground: 0, 0, 0;
+  --primary: 59, 130, 246;
+  --primary-foreground: 255, 255, 255;
+  --secondary: 229, 231, 235;
+  --secondary-foreground: 0, 0, 0;
+  --muted: 229, 231, 235;
+  --muted-foreground: 107, 114, 128;
+  --accent: 243, 244, 246;
+  --accent-foreground: 0, 0, 0;
+  --border: 229, 231, 235;
+  --popover: 255 255 255;
+}
+
+
+body {
+  @apply bg-background text-foreground;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  color: var(--foreground-hex);
+  background-color: var(--background-hex);
+}
+/* Update all color references to use the new CSS variables */
+.bg-primary {
+  background-color: rgb(var(--primary));
+}
+
+.text-primary-foreground {
+  color: rgb(var(--primary-foreground));
+}
+
+.tab-close-confirm {
+  background-color: rgb(var(--close-bg));
+  color: rgb(var(--close-text));
+  transition: background-color 0.3s ease;
+}
+
+.tab-close-confirm:hover {
+  background-color: rgba(var(--close-bg), 0.8);
+}
+
+.tab-close-confirm-text {
+  color: rgb(var(--close-text));
+}
+
+.tab-close-confirm-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.tab-close-confirm-button:hover {
+  background-color: rgba(var(--close-text), 0.1);
+}
+
+.tab-close-confirm-button.confirm {
+  color: rgb(var(--close-confirm));
+}
+
+.tab-close-confirm-button.cancel {
+  color: rgb(var(--close-cancel));
+}
+
+
+/* comapct view column header styles */
+th.px-4.py-2.text-left.text-muted-foreground {
+  padding-left:3px;
+  padding-right:3px;
+  padding-top:3px;
+  padding-bottom:3px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Slider styles */
+.slider-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  touch-action: none;
+  width: 100%;
+  height: 20px;
+}
+
+.slider-track {
+  @apply bg-secondary;
+  position: relative;
+  flex-grow: 1;
+  border-radius: 9999px;
+  height: 3px;
+}
+
+.slider-range {
+  position: absolute;
+  @apply bg-primary;
+  border-radius: 9999px;
+  height: 100%;
+}
+
+.slider-thumb {
+  display: block;
+  width: 20px;
+  height: 20px;
+  @apply bg-background border-2 border-primary;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.slider-thumb:hover {
+  @apply bg-background;
+}
+
+.slider-thumb:focus {
+  outline: none;
+  @apply ring-2 ring-offset-2 ring-primary;
+}
+
+/* Ensure dropdown backgrounds are not transparent */
+.select-content,
+[data-radix-popper-content-wrapper] {
+  background-color: rgb(var(--popover)) !important;
+  color: rgb(var(--popover-foreground)) !important;
+}
+
+
+
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 40%;
+  top:30%;
+  width: 2px;
+  background: rgba(59, 58, 58, 0.312);
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+}
+
+
+.resizer:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.actions-cell {
+  white-space: nowrap;
+  padding: 0 !important;
+}
+
+.actions-cell button {
+  padding: 2px !important;
+}
+
+th {
+  position: relative;
+}
