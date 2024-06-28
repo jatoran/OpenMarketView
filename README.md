@@ -17,6 +17,7 @@ It is designed to help users manage and analyze their stock portfolios and watch
 - Open Source and Free
 
 **Purpose**
+
 I made this as I was tired of having to log into my online accounts to view portfolios and track them, which led to finding stock viewers that I could have as an application on my own computer for "always on" functionality to put in the corner on one of my monitors.  I then found it was hard to find the specific features I wanted without having to pay to remove ads or enable functionality.  And I still disliked sharing my data to a platform I have no control of.  I then looked for a self hosted tracker, (great resource for this is the [awesomelists self-hosted](https://github.com/awesome-selfhosted/awesome-selfhosted) category), but either through overwhelm or lack of options I struck out finding a good repo or open source solution.  So:
 
 **tldr;** I have built a self hosted and free web-application to have a stock viewer of your various portfolios or watchlists.
@@ -205,7 +206,7 @@ frontend/src/components/AddStockModal.tsx
    costBasis: findColumnName(fields, ["Average Cost Basis", "Cost Basis", "Avg Cost"]),
    quantity: findColumnName(fields, ["Quantity", "Count", "SharesCount", "Shares"]),
    symbol: findColumnName(fields, ["Symbol", "Abbreviation", "Stock Symbol", "Ticker"]),
- };```
+ };
 ```
 
 ### Historical Graphing
