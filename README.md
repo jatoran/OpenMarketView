@@ -6,7 +6,7 @@
 OpenMarketView is a **Stock Market List Viewer**.  It is free, self-hosted, open source, web-app, etc. etc.
 It is designed to help users manage and analyze their stock portfolios and watchlists in separate tabs. It provides 5-minute and lifetime stock data, multiple viewing options, theme and UI customization, and various analysis metrics.
 
-![Image Alt Text](Logo.png) 
+![Image Alt Text](Logo-small.png) 
 
 ## What and Why
 - Privacy - Your data does not leave your device.
