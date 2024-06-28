@@ -8,7 +8,6 @@ It is designed to help users manage and analyze their stock portfolios and watch
 
 
 ## What and Why
-**Core Psychological & Emotional Hooks**
 - Privacy - Your data does not leave your device.
 - Create a 24/7 display of your Stock Portfolio or Watchlist
 - Simulate Portfolios and their growth over time
