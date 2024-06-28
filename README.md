@@ -29,47 +29,47 @@ I have also tried to design and document in a manner that promotes extensibility
 
 ## Table of Contents
 
-1. [[#Intro]]
-2. [[#What and Why]]
-   - [[#Core Psychological & Emotional Hooks]]
-   - [[#Purpose]]
-   - [[#Developers]]
-3. [[#Core Features Overview]]
-   - [[#Automatic Data Fetching, Refreshing, and Storage]]
-   - [[#Stock Data Handling]]
-   - [[#Customizeable Views for Multiple Portfolios or Watchlists]]
-   - [[#State Management and Optimization]]
-   - [[#Multiple Exchanges]]
-   - [[#Customizable View Management]]
-   - [[#Custom Themes & UI Customization]]
-   - [[#Tabbed Interface]]
-   - [[#Historical Graphing]]
-   - [[#Enhanced Caching Mechanism]]
-   - [[#Other Features]]
-4. [[#Key Technologies and Tools]]
-   - [[#Frontend]]
-   - [[#Backend]]
-5. [[#Documentation, Developers, Development, and Future Steps]]
-   - [[#Viewing Historical Data]]
-   - [[#Customizing Themes]]
-   - [[#CSV Column Matching]]
-6. [[#Technical Specifications]]
-   - [[#Data]]
-     - [[#Data Safety and Privacy]]
-     - [[#Data Source]]
-     - [[#Database (IndexedDB)]]
-     - [[#Database Structure (IndexedDB)]]
-7. [[#File Structure]]
-8. [[#Subsystem Geography and Data Flow]]
-   - [[#Core Application Subsystem]]
-   - [[#View Subsystems]]
-   - [[#UI Components Subsystem]]
-   - [[#State Management Subsystem]]
-   - [[#Data Management Subsystem]]
-   - [[#Utilities Subsystem]]
-   - [[#Styling Subsystem]]
-   - [[#Page Subsystem]]
-   - [[#Backend Subsystem]]
+1. [Intro](#intro)
+2. [What and Why](#what-and-why)
+  - [Core Psychological & Emotional Hooks](#core-psychological--emotional-hooks)
+  - [Purpose](#purpose)
+  - [Developers](#developers)
+3. [Core Features Overview](#core-features-overview)
+  - [Automatic Data Fetching, Refreshing, and Storage](#automatic-data-fetching-refreshing-and-storage)
+  - [Stock Data Handling](#stock-data-handling)
+  - [Customizeable Views for Multiple Portfolios or Watchlists](#customizeable-views-for-multiple-portfolios-or-watchlists)
+  - [State Management and Optimization](#state-management-and-optimization)
+  - [Multiple Exchanges](#multiple-exchanges)
+  - [Customizable View Management](#customizable-view-management)
+  - [Custom Themes & UI Customization](#custom-themes--ui-customization)
+  - [Tabbed Interface](#tabbed-interface)
+  - [Historical Graphing](#historical-graphing)
+  - [Enhanced Caching Mechanism](#enhanced-caching-mechanism)
+  - [Other Features](#other-features)
+4. [Key Technologies and Tools](#key-technologies-and-tools)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+5. [Documentation, Developers, Development, and Future Steps](#documentation-developers-development-and-future-steps)
+  - [Viewing Historical Data](#viewing-historical-data)
+  - [Customizing Themes](#customizing-themes)
+  - [CSV Column Matching](#csv-column-matching)
+6. [Technical Specifications](#technical-specifications)
+  - [Data](#data)
+   - [Data Safety and Privacy](#data-safety-and-privacy)
+   - [Data Source](#data-source)
+   - [Database (IndexedDB)](#database-indexeddb)
+   - [Database Structure (IndexedDB)](#database-structure-indexeddb)
+7. [File Structure](#file-structure)
+8. [Subsystem Geography and Data Flow](#subsystem-geography-and-data-flow)
+  - [Core Application Subsystem](#core-application-subsystem)
+  - [View Subsystems](#view-subsystems)
+  - [UI Components Subsystem](#ui-components-subsystem)
+  - [State Management Subsystem](#state-management-subsystem)
+  - [Data Management Subsystem](#data-management-subsystem)
+  - [Utilities Subsystem](#utilities-subsystem)
+  - [Styling Subsystem](#styling-subsystem)
+  - [Page Subsystem](#page-subsystem)
+  - [Backend Subsystem](#backend-subsystem)
 
 
 ## Core Features Overview
