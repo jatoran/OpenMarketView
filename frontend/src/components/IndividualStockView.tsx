@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { StockData } from '../services/StockApiService';
 import StockApiService from '../services/StockApiService';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface IndividualStockViewProps {
   stock: StockData;
@@ -16,6 +17,11 @@ const IndividualStockView: React.FC<IndividualStockViewProps> = ({ stock }) => {
   const [timeRange, setTimeRange] = useState<string>('1M');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const loadingSymbolRef = useRef<string | null>(null);
+  const { theme, customThemes } = useTheme();
+  const currentTheme = customThemes[theme];
+  const chartLineColor = currentTheme.colors.chartLine.hex;
+  const chartTextColor = currentTheme.colors.chartText.hex;
+  const chartTimeSelectorColor = currentTheme.colors.chartTimeSelector.hex;
 
 //   console.log(`[IndividualStockView] Rendering for symbol: ${stock.symbol}`);
 
@@ -88,45 +94,52 @@ const IndividualStockView: React.FC<IndividualStockViewProps> = ({ stock }) => {
             <button
               key={range}
               onClick={() => setTimeRange(range)}
-              className={`px-2 py-1 rounded ${timeRange === range ? 'bg-primary text-white' : 'bg-gray-200'}`}
+              className={`px-2 py-1 rounded ${
+                timeRange === range 
+                  ? `bg-chart-time-selector text-white` 
+                  : 'bg-gray-200 dark:bg-gray-700'
+              }`}
+              style={{
+                backgroundColor: timeRange === range ? chartTimeSelectorColor : undefined,
+                color: timeRange === range ? 'white' : undefined,
+              }}
             >
               {range}
             </button>
           ))}
         </div>
         <ResponsiveContainer width="100%" height={400}>
-            {isLoading ? (
-                <div className="flex items-center justify-center h-full">
-                <p>Loading chart data...</p>
-                </div>
-            ) : (
-                <LineChart data={chartData}>
-<XAxis 
-  dataKey="date" 
-  tick={{ fontSize: 12 }} // Increased font size
-  tickFormatter={(tick) => {
-    const date = new Date(tick);
-    if (chartData.length > 365) {
-      return `Q${Math.floor(date.getMonth() / 3) + 1} ${date.getFullYear()}`;
-    }
-    return date.toLocaleDateString();
-  }}
-  interval="preserveStartEnd"
-  tickCount={4} // Reduced to 4 ticks, including start and end
-/>
-                <YAxis domain={['auto', 'auto']} />
-                <Tooltip 
-                    formatter={(value: any) => `$${Number(value).toFixed(2)}`} 
-                    contentStyle={{ 
-                        backgroundColor: 'rgb(var(--tooltip-bg))', 
-                        color: 'rgb(var(--tooltip-text))' 
-                    }} 
-                    />
-
-                <Line type="monotone" dataKey="close" stroke="#8884d8" dot={false} />
-                </LineChart>
-            )}
-            </ResponsiveContainer>
+          {isLoading ? (
+            <div className="flex items-center justify-center h-full">
+              <p>Loading chart data...</p>
+            </div>
+          ) : (
+            <LineChart data={chartData}>
+              <XAxis 
+                dataKey="date" 
+                tick={{ fontSize: 12, fill: chartTextColor }}
+                tickFormatter={(tick) => {
+                  const date = new Date(tick);
+                  if (chartData.length > 365) {
+                    return `Q${Math.floor(date.getMonth() / 3) + 1} ${date.getFullYear()}`;
+                  }
+                  return date.toLocaleDateString();
+                }}
+                interval="preserveStartEnd"
+                tickCount={4}
+              />
+              <YAxis domain={['auto', 'auto']} tick={{ fill: chartTextColor }} />
+              <Tooltip 
+                formatter={(value: any) => `$${Number(value).toFixed(2)}`} 
+                contentStyle={{ 
+                  backgroundColor: 'rgb(var(--popover))', 
+                  color: 'rgb(var(--popover-foreground))' 
+                }} 
+              />
+              <Line type="monotone" dataKey="close" stroke={chartLineColor} dot={false} />
+            </LineChart>
+          )}
+        </ResponsiveContainer>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -4,7 +4,7 @@ export interface TabData {
   id: string;
   title: string;
   stocks: StockData[];
-  viewType: 'compact' | 'detailed' | 'individual';
+  viewType: 'compact' | 'detailed' | 'individual' | 'market';
   columns?: string[];
   isActive: boolean;
 }
@@ -38,6 +38,9 @@ export interface ThemeColors {
   ring: ColorValue;
   popover: ColorValue;
   popoverForeground: ColorValue;
+  chartLine: ColorValue;
+  chartText: ColorValue;
+  chartTimeSelector: ColorValue; 
 }
 
 export interface Theme {

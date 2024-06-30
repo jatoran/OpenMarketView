@@ -82,6 +82,11 @@ class IndexedDBService {
     }
     return this.dbPromise;
   }
+
+  private getTodayUTC(): string {
+    const now = new Date();
+    return new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()).toISOString().split('T')[0];
+  }
   
 
   async logApiCall(success: boolean, duration: number, type: string, requestData?: any, responseData?: any, errorMessage?: string): Promise<void> {
@@ -89,7 +94,7 @@ class IndexedDBService {
     const tx = db.transaction(['apiHistory', 'apiCallDetails'], 'readwrite');
     const historyStore = tx.objectStore('apiHistory');
     const detailsStore = tx.objectStore('apiCallDetails');
-    const today = new Date().toISOString().split('T')[0];
+    const today = this.getTodayUTC();
     const time = new Date().toISOString();
     const id = `${today}-${time}-${type}-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -102,6 +107,7 @@ class IndexedDBService {
       failureCalls: 0
     };
 
+    // Update the entry
     entry.totalCalls += 1;
     entry.totalDuration += duration;
     entry.avgDuration = entry.totalDuration / entry.totalCalls;
@@ -110,6 +116,8 @@ class IndexedDBService {
     } else {
       entry.failureCalls += 1;
     }
+
+    await historyStore.put(entry);
 
     const callDetail: ApiCallDetail = {
       id,
@@ -309,7 +317,7 @@ class IndexedDBService {
   
   async getTotalApiCalls(): Promise<{ today: number; lifetime: number; dateRange: { start: string; end: string } }> {
     const db = await this.getDB();
-    const today = new Date().toISOString().split('T')[0];
+    const today = this.getTodayUTC();
     const apiHistoryStore = db.transaction('apiHistory', 'readonly').objectStore('apiHistory');
 
     const allEntries = await apiHistoryStore.getAll();
@@ -327,6 +335,7 @@ class IndexedDBService {
       dateRange
     };
   }
+
 
   async getFiveMinuteData(symbol: string, startDateTime?: string, endDateTime?: string): Promise<(FiveMinuteDataPoint & { symbol: string })[]> {
     if (typeof window === 'undefined') return [];

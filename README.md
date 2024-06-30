@@ -6,7 +6,7 @@
 OpenMarketView is a **Stock Market List Viewer**.  It is free, self-hosted, open source, web-app, etc. etc.
 It is designed to help users manage and analyze their stock portfolios and watchlists in separate tabs. It provides 5-minute and lifetime stock data, multiple viewing options, theme and UI customization, and various analysis metrics.
 
-![Image Alt Text](images/logo-alt-small.png) 
+![Image Alt Text](images/omv-marketview.png) 
 
 ## What and Why
 - Privacy - Your data does not leave your device.
@@ -38,6 +38,8 @@ I have also tried to design and document in a manner that promotes extensibility
 6. [Technical Specifications](#technical-specifications)
 7. [File Structure](#file-structure)
 8. [Subsystem Geography and Data Flow](#subsystem-geography-and-data-flow)
+9. [Installation](#installation)
+10. [Screenshots](#screenshots)
 
 
 ## Core Features Overview
@@ -515,3 +517,99 @@ The Page Subsystem, including `index.tsx`, `_app.tsx`, and `_document.tsx`, serv
 The `app.py` Flask server handles requests from the frontend's API Services. It interacts with external data sources (e.g., Yahoo Finance API) to fetch stock data, processes this data, and sends it back to the frontend. It implements CORS for secure cross-origin requests and uses the [yfinance](https://github.com/ranaroussi/yfinance) library for stock data retrieval.
 **Associated Modules**
 - `app.py`: Flask server handling stock data retrieval and processing
+
+---
+
+## Installation
+
+**Only Tested on Windows 10 as of 6/29/2024**
+
+### Prerequisites
+
+Ensure you have the following installed on your system:
+- Python (version 3.7 or higher)
+- Node.js and npm (Node Package Manager)
+
+### Step-by-Step Guide
+
+#### 1. Clone the Repository
+
+First, clone the repository to your local machine:
+
+```sh
+git clone https://github.com/yourusername/OpenMarketView.git
+cd OpenMarketView
+```
+
+#### 2. Set Up the Backend
+
+Navigate to the `backend` directory, set up a virtual environment, and install the required Python packages.
+
+```sh
+cd backend
+python -m venv venv  # Create a virtual environment
+source venv/bin/activate  # Activate the virtual environment (use `venv\Scripts\activate` on Windows)
+pip install -r requirements.txt  # Install the required Python packages
+```
+
+#### 3. Set Up the Frontend
+
+Navigate to the `frontend` directory and install the required npm packages.
+
+```sh
+cd ../frontend
+npm install  # Install the required npm packages
+```
+
+#### 4. Running the Application
+
+You will need two terminals to run both the backend and frontend.
+
+**Terminal 1: Running the Backend**
+
+```sh
+cd backend
+source venv/bin/activate  # Activate the virtual environment (use `venv\Scripts\activate` on Windows)
+python app.py  # Start the backend server
+```
+
+**Terminal 2: Running the Frontend**
+
+```sh
+cd frontend
+npm run dev  # Start the frontend development server
+```
+
+#### 5. Access the Application
+
+Once both servers are running, open your web browser and navigate to:
+
+```
+http://localhost:3000
+```
+
+You should see the OpenMarketView application running.
+
+### Additional Notes
+
+- **Backend Server:** The backend server is a Flask application that handles API requests and fetches stock data using the `yfinance` library.
+- **Frontend Server:** The frontend is a React application built with Next.js that provides the user interface for displaying stock information and managing portfolios.
+- **Virtual Environment:** Using a virtual environment for the backend ensures that all dependencies are contained within a specific project environment, avoiding conflicts with other Python projects on your system.
+
+For any further questions or issues, please refer to the project's issues section on GitHub or contact the maintainer.
+
+---
+
+This documentation should guide users through the installation and setup process for both the backend and frontend of your OpenMarketView application.
+
+
+## Screenshots
+
+![Image Alt Text](images/omv-columns.png) 
+
+![Image Alt Text](images/omv-compactview.png) 
+
+![Image Alt Text](images/omv-individual.png) 
+
+![Image Alt Text](images/omv-theme.png) 
+![Image Alt Text](images/omv-marketview.png) 

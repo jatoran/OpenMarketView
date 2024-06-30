@@ -7,6 +7,7 @@ import { UserSettings } from '../types';
 import EditStockModal from './EditStockModal';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import IndexedDBService from '../services/IndexedDBService';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface DetailedViewProps {
   stocks: StockData[];
@@ -25,7 +26,11 @@ const DetailedView: React.FC<DetailedViewProps> = ({
 }) => {
   const [editingStock, setEditingStock] = useState<StockData | null>(null);
   const [removingStock, setRemovingStock] = useState<string | null>(null);
-  const [fiveMinuteData, setFiveMinuteData] = useState<{ [key: string]: any[] }>({});
+  const [fiveMinuteData, setFiveMinuteData] = useState<{ [key: string]: any[] }>({}); 
+  const { theme, customThemes } = useTheme();
+  const currentTheme = customThemes[theme];
+  const chartLineColor = currentTheme.colors.chartLine.hex;
+  const chartTextColor = currentTheme.colors.chartText.hex;
 
   const getCardClass = () => {
     switch (settings.stockSpacing) {
@@ -91,7 +96,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({
       const price = payload[0].value.toFixed(2);
   
       return (
-        <div className="custom-tooltip" style={{ backgroundColor: 'rgba(var(--tooltip-bg), 0.8)', color: 'rgb(var(--tooltip-text))', padding: '2px 5px', fontSize: '12px' }}>
+        <div className="custom-tooltip" style={{ backgroundColor: 'rgba(var(--popover), 0.8)', color: 'rgb(var(--popover-foreground))', padding: '2px 5px', fontSize: '12px' }}>
           <p className="label">{`${time}`}</p>
           <p className="price">{`$${price}`}</p>
         </div>
@@ -146,16 +151,16 @@ const DetailedView: React.FC<DetailedViewProps> = ({
 
             
             <CardContent>
-  <p className="text-foreground dark:text-detailedCardForeground">Sector: {stock.sector}</p>
-  <div className="mt-2 space-y-1 text-foreground dark:text-detailedCardForeground">
-    <ResponsiveContainer width="100%" height={200}>
-      <LineChart data={fiveMinuteData[stock.symbol]}>
-        <Tooltip content={<CustomTooltip />} position={{ x: 0, y: 0 }} />
-        <Line type="monotone" dataKey="Close" stroke="#8884d8" dot={false} isAnimationActive={false} />
-        <XAxis dataKey="DateTime" hide />
-        <YAxis domain={['auto', 'auto']} hide />
-      </LineChart>
-    </ResponsiveContainer>
+            <p className="text-foreground dark:text-detailedCardForeground">Sector: {stock.sector}</p>
+            <div className="mt-2 space-y-1 text-foreground dark:text-detailedCardForeground">
+              <ResponsiveContainer width="100%" height={200}>
+                <LineChart data={fiveMinuteData[stock.symbol]}>
+                  <Tooltip content={<CustomTooltip />} position={{ x: 0, y: 0 }} />
+                  <Line type="monotone" dataKey="Close" stroke={chartLineColor} dot={false} isAnimationActive={false} />
+                  <XAxis dataKey="DateTime" hide />
+                  <YAxis domain={['auto', 'auto']} hide />
+                </LineChart>
+              </ResponsiveContainer>
 
 
 

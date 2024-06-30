@@ -86,7 +86,9 @@ const useColumnDefinitions = (
     {
       Header: 'Actions',
       id: 'actions',
-      width: 80,
+      width: 60,
+      minWidth: 60,
+      maxWidth: 60,
       disableResizing: true,
       disableSortBy: true,
       Cell: ({ row }: { row: { original: StockData } }) => (
@@ -95,7 +97,7 @@ const useColumnDefinitions = (
             onClick={() => handleRemoveClick(row.original.symbol)}
             variant="ghost"
             size="sm"
-            className="p-1"
+            className="p-0 h-6 w-6"
           >
             {removingStock === row.original.symbol ? (
               <Check className="h-3 w-3 text-red-500" />
@@ -107,7 +109,7 @@ const useColumnDefinitions = (
             onClick={() => setEditingStock(row.original)}
             variant="ghost"
             size="sm"
-            className="p-1"
+            className="p-0 h-6 w-6"
           >
             <Edit className="h-3 w-3" />
           </Button>
@@ -122,7 +124,7 @@ const useColumnDefinitions = (
       Cell: ({ value, row }: { value: string; row: { original: StockData } }) => (
         <button 
           onClick={() => onStockClick(row.original)}
-          className="text-blue-600 hover:underline"
+          className="font-bold text-primary hover:underline text-lg"
         >
           {value}
         </button>
@@ -563,7 +565,9 @@ const CompactView: React.FC<CompactViewProps> = ({
                       <td
                         key={cell.column.id}
                         {...restCellProps}
-                        className={`px-4 py-2 ${cell.column.id === 'actions' ? 'actions-cell' : ''}`}
+                        className={`px-4 py-2 ${cell.column.id === 'actions' ? 'actions-cell' : ''} ${
+                          cell.column.id === 'symbol' ? 'text-lg' : ''
+                        }`}
                         style={{ width: columnState.widths[cell.column.id] || cell.column.width }}
                       >
                         {cell.render('Cell')}
@@ -576,7 +580,7 @@ const CompactView: React.FC<CompactViewProps> = ({
             <TotalsRow columns={columns} stocks={stocks} columnWidths={columnState.widths} />
           </tbody>
         </table>
-        </div>
+      </div>
       {editingStock && (
         <EditStockModal
           stock={editingStock}

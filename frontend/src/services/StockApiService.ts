@@ -81,6 +81,39 @@ export interface FiveMinuteDataPoint {
   Volume: number;
 }
 
+export interface MarketOverview {
+  [key: string]: {
+    name: string;
+    current: number;
+    change: number;
+    changePercent: number;
+  };
+}
+
+export interface MarketHistory {
+  date: string;
+  close: number;
+}
+
+export interface MarketSector {
+  name: string;
+  change: number;
+}
+
+export interface EconomicIndicator {
+  name: string;
+  current: number;
+  change: number;
+  changePercent: number;
+}
+
+export interface Bitcoin {
+  name: string;
+  current: number;
+  change: number;
+  changePercent: number;
+}
+
 interface FetchResult {
   stockData: StockData[];
   fetchedSymbols: string[];
@@ -455,6 +488,108 @@ class StockApiService {
       } else {
         await this.logApiCall(false, duration, 'fetchFiveMinuteData', { symbol }, null, 'Unknown error');
         console.error(`Error fetching five-minute data for ${symbol}: Unknown error`);
+      }
+      throw error;
+    }
+  }
+
+  async fetchMarketOverview(): Promise<MarketOverview> {
+    const startTime = Date.now();
+    try {
+      const response = await axios.get(`${API_BASE_URL}/market_overview`);
+      const duration = Date.now() - startTime;
+      await this.logApiCall(true, duration, 'fetchMarketOverview', {}, response.data);
+      return response.data;
+    } catch (error) {
+      const duration = Date.now() - startTime;
+      if (isError(error)) {
+        await this.logApiCall(false, duration, 'fetchMarketOverview', {}, null, error.message);
+        console.error('Error fetching market overview:', error.message);
+      } else {
+        await this.logApiCall(false, duration, 'fetchMarketOverview', {}, null, 'Unknown error');
+        console.error('Error fetching market overview: Unknown error');
+      }
+      throw error;
+    }
+  }
+
+  async fetchMarketHistory(index: string, period: string): Promise<MarketHistory[]> {
+    const startTime = Date.now();
+    try {
+      const response = await axios.get(`${API_BASE_URL}/market_history`, {
+        params: { index, period }
+      });
+      const duration = Date.now() - startTime;
+      await this.logApiCall(true, duration, 'fetchMarketHistory', { index, period }, response.data);
+      return response.data;
+    } catch (error) {
+      const duration = Date.now() - startTime;
+      if (isError(error)) {
+        await this.logApiCall(false, duration, 'fetchMarketHistory', { index, period }, null, error.message);
+        console.error('Error fetching market history:', error.message);
+      } else {
+        await this.logApiCall(false, duration, 'fetchMarketHistory', { index, period }, null, 'Unknown error');
+        console.error('Error fetching market history: Unknown error');
+      }
+      throw error;
+    }
+  }
+
+  async fetchMarketSectors(): Promise<{ [key: string]: MarketSector }> {
+    const startTime = Date.now();
+    try {
+      const response = await axios.get(`${API_BASE_URL}/market_sectors`);
+      const duration = Date.now() - startTime;
+      await this.logApiCall(true, duration, 'fetchMarketSectors', {}, response.data);
+      return response.data;
+    } catch (error) {
+      const duration = Date.now() - startTime;
+      if (isError(error)) {
+        await this.logApiCall(false, duration, 'fetchMarketSectors', {}, null, error.message);
+        console.error('Error fetching market sectors:', error.message);
+      } else {
+        await this.logApiCall(false, duration, 'fetchMarketSectors', {}, null, 'Unknown error');
+        console.error('Error fetching market sectors: Unknown error');
+      }
+      throw error;
+    }
+  }
+
+  async fetchEconomicIndicators(): Promise<{ [key: string]: EconomicIndicator }> {
+    const startTime = Date.now();
+    try {
+      const response = await axios.get(`${API_BASE_URL}/economic_indicators`);
+      const duration = Date.now() - startTime;
+      await this.logApiCall(true, duration, 'fetchEconomicIndicators', {}, response.data);
+      return response.data;
+    } catch (error) {
+      const duration = Date.now() - startTime;
+      if (isError(error)) {
+        await this.logApiCall(false, duration, 'fetchEconomicIndicators', {}, null, error.message);
+        console.error('Error fetching economic indicators:', error.message);
+      } else {
+        await this.logApiCall(false, duration, 'fetchEconomicIndicators', {}, null, 'Unknown error');
+        console.error('Error fetching economic indicators: Unknown error');
+      }
+      throw error;
+    }
+  }
+
+  async fetchBitcoinData(): Promise<Bitcoin> {
+    const startTime = Date.now();
+    try {
+      const response = await axios.get(`${API_BASE_URL}/bitcoin`);
+      const duration = Date.now() - startTime;
+      await this.logApiCall(true, duration, 'fetchBitcoinData', {}, response.data);
+      return response.data;
+    } catch (error) {
+      const duration = Date.now() - startTime;
+      if (isError(error)) {
+        await this.logApiCall(false, duration, 'fetchBitcoinData', {}, null, error.message);
+        console.error('Error fetching Bitcoin data:', error.message);
+      } else {
+        await this.logApiCall(false, duration, 'fetchBitcoinData', {}, null, 'Unknown error');
+        console.error('Error fetching Bitcoin data: Unknown error');
       }
       throw error;
     }

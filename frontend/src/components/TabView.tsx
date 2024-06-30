@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Check, X, AlertTriangle } from 'lucide-react'; // Import Check and X icons
+import { Check, X, AlertTriangle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { debounce } from 'lodash';
 import { Button } from './ui/button';
@@ -13,9 +12,8 @@ import StockApiService from '../services/StockApiService';
 import { TabData, UserLayout, UserSettings } from '../types';
 import { List, Grid } from 'lucide-react';
 import SelectViewTypeModal from './SelectViewTypeModal';
-// import NewsView from './NewsView';
-// import SimulatedTradingView from './SimulatedTradingView';
 import IndividualStockView from './IndividualStockView';
+import MarketView from './MarketView'; // Import the new MarketView component
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -76,19 +74,18 @@ const TabView: React.FC<TabViewProps> = React.memo(({
     setActiveTabId(newTab.id);
   };
 
-  // const handleSelectViewType = (viewType: 'compact' | 'detailed' | 'news' | 'simulated') => {
-    const handleSelectViewType = (viewType: 'compact' | 'detailed') => {
-    const newTab: TabData = {
-      id: Date.now().toString(),
-      title: `New ${viewType.charAt(0).toUpperCase() + viewType.slice(1)} Tab`,
-      stocks: [],
-      viewType: viewType,
-      isActive: true  // Add this line
+    const handleSelectViewType = (viewType: 'compact' | 'detailed' | 'market') => {
+      const newTab: TabData = {
+        id: Date.now().toString(),
+        title: `New ${viewType.charAt(0).toUpperCase() + viewType.slice(1)} Tab`,
+        stocks: [],
+        viewType: viewType,
+        isActive: true
+      };
+      onUpdateTabs([...tabs, newTab]);
+      setActiveTabId(newTab.id);
+      setIsSelectingViewType(false);
     };
-    onUpdateTabs([...tabs, newTab]);
-    setActiveTabId(newTab.id);
-    setIsSelectingViewType(false);
-  };
 
   const closeTab = (tabId: string) => {
     if (closingTabId === tabId) {
@@ -399,10 +396,13 @@ const TabView: React.FC<TabViewProps> = React.memo(({
                 {tab.viewType === 'simulated' && (
                   <SimulatedTradingView stocks={tab.stocks} />
                 )} */}
+                {tab.viewType === 'market' && (
+                  <MarketView />
+                )}
                 {tab.viewType === 'individual' && tab.stocks.length > 0 && (
                   <IndividualStockView stock={tab.stocks[0]} />
                 )}
-                {tab.viewType !== 'individual' && (
+                {tab.viewType !== 'individual' && tab.viewType !== 'market' && (
                   <Button onClick={() => setIsAddingStock(true)} className="mt-4">
                     Add Stock
                   </Button>

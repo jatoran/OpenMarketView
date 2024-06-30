@@ -25,6 +25,10 @@ const config: Config = {
         'detailed-card-foreground': 'var(--detailed-card-foreground-hex)',
         popover: 'var(--popover-hex)',
         'popover-foreground': 'var(--popover-foreground-hex)',
+        'chart-line': 'var(--chart-line-hex)',
+        'chart-text': 'var(--chart-text-hex)',
+        
+        'chart-time-selector': 'var(--chart-time-selector-hex)',
       },
       textColor: {
         DEFAULT: 'var(--foreground-hex)',

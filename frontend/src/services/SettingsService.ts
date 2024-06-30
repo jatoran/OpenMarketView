@@ -12,11 +12,11 @@ const defaultThemes: { [key: string]: Theme } = {
   light: {
     name: 'Light',
     colors: {
-      background: { rgb: '255, 255, 255', hex: '#292929' },
+      background: { rgb: '255, 255, 255', hex: '#ffffff' },
       foreground: { rgb: '0, 0, 0', hex: '#000000' },
       card: { rgb: '255, 255, 255', hex: '#ffffff' },
       cardForeground: { rgb: '0, 0, 0', hex: '#000000' },
-      detailedCardForeground: { rgb: '0, 0, 0', hex: '#000000' }, 
+      detailedCardForeground: { rgb: '0, 0, 0', hex: '#000000' },
       primary: { rgb: '59, 130, 246', hex: '#3b82f6' },
       primaryForeground: { rgb: '255, 255, 255', hex: '#ffffff' },
       secondary: { rgb: '229, 231, 235', hex: '#e5e7eb' },
@@ -29,17 +29,20 @@ const defaultThemes: { [key: string]: Theme } = {
       input: { rgb: '229, 231, 235', hex: '#e5e7eb' },
       ring: { rgb: '59, 130, 246', hex: '#3b82f6' },
       popover: { rgb: '255, 255, 255', hex: '#ffffff' },
-      popoverForeground: { rgb: '0, 0, 0', hex: '#000000' }
+      popoverForeground: { rgb: '0, 0, 0', hex: '#000000' },
+      chartLine: { rgb: '59, 130, 246', hex: '#3b82f6' },
+      chartText: { rgb: '0, 0, 0', hex: '#000000' },
+      chartTimeSelector: { rgb: '59, 130, 246', hex: '#3b82f6' }
     },
   },
   dark: {
     name: 'Dark',
     colors: {
-      background: { rgb: '41, 41, 41', hex: '#121212' },
-      foreground: { rgb: '255, 255, 255', hex: '#ffffff' }, // Changed to white
+      background: { rgb: '41, 41, 41', hex: '#292929' },
+      foreground: { rgb: '255, 255, 255', hex: '#ffffff' },
       card: { rgb: '74, 74, 74', hex: '#4a4a4a' },
       cardForeground: { rgb: '229, 231, 235', hex: '#e5e7eb' },
-      detailedCardForeground: { rgb: '255, 255, 255', hex: '#ffffff' }, // New color for DetailedView cards
+      detailedCardForeground: { rgb: '255, 255, 255', hex: '#ffffff' },
       primary: { rgb: '56, 189, 248', hex: '#38bdf8' },
       primaryForeground: { rgb: '18, 18, 18', hex: '#121212' },
       secondary: { rgb: '71, 85, 105', hex: '#475569' },
@@ -52,11 +55,13 @@ const defaultThemes: { [key: string]: Theme } = {
       input: { rgb: '51, 65, 85', hex: '#334155' },
       ring: { rgb: '56, 189, 248', hex: '#38bdf8' },
       popover: { rgb: '20, 20, 20', hex: '#141414' },
-      popoverForeground: { rgb: '255, 255, 255', hex: '#ffffff' }
+      popoverForeground: { rgb: '255, 255, 255', hex: '#ffffff' },
+      chartLine: { rgb: '129, 140, 248', hex: '#818cf8' },
+      chartText: { rgb: '255, 255, 255', hex: '#ffffff' },
+      chartTimeSelector: { rgb: '129, 140, 248', hex: '#818cf8' },
     },
   },
 };
-
 
 export const clearStorageForTesting = (): void => {
   if (typeof window !== 'undefined') {

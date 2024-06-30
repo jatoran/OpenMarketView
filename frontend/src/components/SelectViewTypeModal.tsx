@@ -2,8 +2,7 @@ import React from 'react';
 import { Button } from './ui/button';
 
 interface SelectViewTypeModalProps {
-  // onSelect: (viewType: 'compact' | 'detailed' | 'news' | 'simulated') => void;
-  onSelect: (viewType: 'compact' | 'detailed') => void;
+  onSelect: (viewType: 'compact' | 'detailed' | 'market') => void;
   onClose: () => void;
 }
 
@@ -15,8 +14,7 @@ const SelectViewTypeModal: React.FC<SelectViewTypeModalProps> = ({ onSelect, onC
         <div className="space-y-2">
           <Button onClick={() => onSelect('compact')} className="w-full">Compact View</Button>
           <Button onClick={() => onSelect('detailed')} className="w-full">Detailed View</Button>
-          {/* <Button onClick={() => onSelect('news')} className="w-full">News View</Button> */}
-          {/* <Button onClick={() => onSelect('simulated')} className="w-full">Simulated Trading View</Button> */}
+          <Button onClick={() => onSelect('market')} className="w-full">Market View</Button>
         </div>
         <Button onClick={onClose} className="mt-4 w-full">Cancel</Button>
       </div>

@@ -36,7 +36,7 @@ const useTabManagement = () => {
         id: '1',
         title: 'Default View',
         stocks: [],
-        viewType: 'compact',
+        viewType: 'market',
         isActive: true  // Add this line
       };
       setTabs([defaultTab]);

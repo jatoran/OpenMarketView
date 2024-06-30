@@ -177,6 +177,9 @@ const Settings: React.FC<SettingsProps> = ({
     ring: 'Focus Ring',
     popover: 'Popover Background',
     popoverForeground: 'Popover Text ',
+    chartLine: 'Chart Line Color',
+    chartText: 'Chart Text Color',
+    chartTimeSelector: 'Chart Time Selector Color',
   };
   
   return (
